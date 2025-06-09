@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vertex V1</title>
+  <!-- Google Fonts Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Customizations */
+    :root {
+      --color-body-text: #9ca3af;
+      --color-bg-dark: #000000;
+      --color-purple: #7c3aed; /* Violet-600 Tailwind */
+      --color-purple-dark: #5b21b6; /* Violet-800 Tailwind */
+      --transition-fast: 0.25s ease-in-out;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: var(--color-bg-dark);
+      color: var(--color-body-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    h1,h2,h3 {
+      color: #e0e7ff; /* Light violet for headings */
+    }
+
+    /* Header Styling */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(0 0 0 / 0.85);
+      backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid #222;
+      z-index: 50;
+      transition: background-color var(--transition-fast);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    nav a {
+      color: #9ca3af; /* Neutral Gray Light */
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+    }
+    nav a:hover, nav a:focus-visible {
+      color: var(--color-purple);
+      background-color: #111;
+      outline-offset: 2px;
+      outline: 2px solid var(--color-purple);
+    }
+
+    /* Buttons */
+
+    .btn-primary {
+      background-color: var(--color-purple);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.5rem;
+      font-size: 1.25rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+      transition: background-color var(--transition-fast), transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      box-shadow: 0 2px 8px rgb(124 58 237 / 0.5);
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background-color: var(--color-purple-dark);
+      outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgb(124 58 237 / 0.8);
+    }
+
+    /* Discord button styling */
+    .btn-discord {
+      background-color: #5865F2; /* Discord blurple */
+      color: white;
+      font-weight: 700;
+      padding: 0.625rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.125rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+      transition: background-color var(--transition-fast), transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      box-shadow: 0 2px 8px rgb(88 101 242 / 0.7);
+    }
+    .btn-discord:hover, .btn-discord:focus-visible {
+      background-color: #4752c4;
+      outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgb(71 82 196 / 0.9);
+    }
+    .btn-discord svg {
+      margin-right: 0.5rem;
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* Card styling */
+    .card {
+      background-color: #111111;
+      border-radius: 0.75rem;
+      box-shadow: 0 6px 14px rgb(0 0 0 / 0.8);
+      padding: 2rem 1.5rem 2rem 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ddd;
+    }
+    .card:hover, .card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgb(124 58 237 / 0.8);
+      outline: none;
+      color: white;
+    }
+
+    /* Icons containers */
+    .icon-wrapper {
+      color: #a78bfa; /* Violet-400 */
+      stroke: currentColor;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1rem;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Section spacing */
+    section {
+      padding-top: 4rem;
+      padding-bottom: 5rem;
+    }
+
+    /* Headings */
+    h1.hero-title {
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.2;
+      color: #ddd;
+      margin-bottom: 1.25rem;
+      user-select: text;
+    }
+
+    p.hero-subtitle {
+      font-size: 1.125rem;
+      max-width: 700px;
+      color: var(--color-body-text);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Stats card */
+    .stat-card {
+      background-color: #1a1a1a;
+      border-radius: 0.75rem;
+      padding: 2rem 1rem;
+      box-shadow: 0 5px 10px rgb(124 58 237 / 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      color: #ccc;
+    }
+    .stat-card:hover, .stat-card:focus-within {
+      background-color: #321d6e;
+      outline: none;
+      color: white;
+    }
+    .stat-number {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--color-purple);
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-weight: 600;
+      color: var(--color-body-text);
+    }
+
+    #theme-toggle {
+      cursor: pointer;
+      border-radius: 0.375rem;
+      border: 2px solid var(--color-purple);
+      padding: 0.35rem 0.9rem;
+      background: transparent;
+      font-weight: 600;
+      color: var(--color-purple);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+      user-select: none;
+    }
+    #theme-toggle:hover, #theme-toggle:focus-visible {
+      background-color: var(--color-purple);
+      color: #000;
+      border-color: var(--color-purple);
+      outline-offset: 2px;
+      outline: 2px solid var(--color-purple-dark);
+    }
+
+    /* Mobile menu toggle button */
+    #mobile-menu-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-purple);
+      transition: color var(--transition-fast);
+    }
+    #mobile-menu-button:hover, #mobile-menu-button:focus-visible {
+      color: var(--color-purple-dark);
+      outline-offset: 2px;
+      outline: 2px solid var(--color-purple-dark);
+    }
+
+    /* Mobile nav panel */
+    #mobile-menu {
+      display: none;
+      flex-direction: column;
+      background-color: var(--color-bg-dark);
+      padding: 1rem 1rem;
+      border-top: 1px solid #222;
+    }
+    #mobile-menu.active {
+      display: flex;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container flex items-center justify-between h-16">
+      <a href="#" class="text-2xl font-extrabold tracking-tight text-violet-400 select-none" aria-label="Vertex V1 Logo">
+        Vertex V1
+      </a>
+      <nav class="hidden md:flex items-center space-x-6" aria-label="Primary Navigation">
+        <a href="#features" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded text-violet-400 hover:text-violet-300">Features</a>
+        <a href="#stats" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded text-violet-400 hover:text-violet-300">Stats</a>
+        <a href="#devices" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded text-violet-400 hover:text-violet-300">Devices</a>
+        <a href="#get-started" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded text-violet-400 hover:text-violet-300">Get Started</a>
+        <button id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">Light</button>
+      </nav>
+      <button id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+        </svg>
+      </button>
+    </div>
+    <nav id="mobile-menu" aria-label="Mobile Navigation">
+      <a href="#features" class="block py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 text-violet-400 hover:text-violet-300">Features</a>
+      <a href="#stats" class="block py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 text-violet-400 hover:text-violet-300">Stats</a>
+      <a href="#devices" class="block py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 text-violet-400 hover:text-violet-300">Devices</a>
+      <a href="#get-started" class="block py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 text-violet-400 hover:text-violet-300">Get Started</a>
+      <button id="mobile-theme-toggle" class="mt-2 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 text-violet-400" aria-label="Toggle light/dark theme" title="Toggle light/dark theme">Light</button>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-label="Hero Section" class="text-center px-4 pt-20 pb-28 container max-w-4xl mx-auto select-text">
+      <h1 class="hero-title">
+        Vertex, you paste we execute
+      </h1>
+      <p class="hero-subtitle max-w-2xl mx-auto">
+        The ultimate solution to build with speed and precision.
+      </p>
+      <div class="flex justify-center space-x-6">
+        <a href="#" class="btn-primary" role="button" aria-label="Download Vertex">Download Vertex</a>
+        <a href="https://discord.gg/vertex" target="_blank" rel="noopener" class="btn-discord" role="button" aria-label="Join Vertex Discord">
+          <svg viewBox="0 0 245 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M104.4 71.3c-5.7 0-10.3 5-10.3 11.2 0 6.3 4.6 11.3 10.3 11.3 5.8 0 10.4-5 10.3-11.3 0-6.2-4.5-11.2-10.3-11.2zm36.2 0c-5.7 0-10.3 5-10.3 11.2 0 6.3 4.6 11.3 10.3 11.3 5.8 0 10.4-5 10.3-11.3 0-6.2-4.5-11.2-10.3-11.2z" fill="white"/></svg>
+          Discord
+        </a>
+      </div>
+    </section>
+
+    <section id="features" aria-labelledby="features-heading" class="px-4 container max-w-6xl mx-auto">
+      <h2 id="features-heading" class="text-3xl font-semibold mb-14 text-center select-text">Feature Highlights</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-4xl mx-auto">
+        <article tabindex="0" class="card" aria-label="Very Cheap">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Very Cheap</h3>
+          <p>Enjoy premium features at an affordable price you’ll love.</p>
+        </article>
+        <article tabindex="0" class="card" aria-label="Keyless Tool">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M7 14a3 3 0 110-6 3 3 0 010 6z" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 14l10-4" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Keyless Tool</h3>
+          <p>No keys needed – seamless access anytime, no hassle.</p>
+        </article>
+        <article tabindex="0" class="card" aria-label="24/7 Support">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M18 8a6 6 0 01-12 0" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 14h.01" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 21v-7" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+          <p>Reliable support round the clock for all your questions.</p>
+        </article>
+      </div>
+      <p class="max-w-3xl mx-auto mt-10 text-center text-gray-400 select-text">I hope you enjoy your journey with Vertex V1—building with speed and precision made effortless by modern technology and care.</p>
+    </section>
+
+    <section id="stats" aria-label="Statistics Section" class="px-4 container max-w-5xl mx-auto mt-32 mb-20">
+      <h2 class="text-3xl font-semibold mb-12 text-center select-text">Trusted by developers worldwide</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <div tabindex="0" class="stat-card" aria-label="10k+ projects built">
+          <div class="stat-number">10,000+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div tabindex="0" class="stat-card" aria-label="75+ Weekly Downloads">
+          <div class="stat-number">75+</div>
+          <div class="stat-label">Weekly Downloads</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="devices" aria-labelledby="devices-heading" class="px-4 container max-w-5xl mx-auto mt-12 mb-20">
+      <h2 id="devices-heading" class="text-3xl font-semibold mb-12 text-center select-text">Devices</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-4xl mx-auto">
+        <article tabindex="0" class="card" aria-label="PC Support">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2" y="6" width="20" height="12" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M8 18h8" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">PC</h3>
+          <p>Ready to use with full features for Windows and desktop platforms.</p>
+        </article>
+        <article tabindex="0" class="card" aria-label="Coming Soon">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Coming Soon</h3>
+          <p>iOS is currently under development. Stay tuned for updates!</p>
+        </article>
+        <article tabindex="0" class="card" aria-label="Android Ready">
+          <svg class="icon-wrapper" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="6" y="4" width="12" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 20h6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <h3 class="text-xl font-semibold mb-2">Android</h3>
+          <p>Ready to download and use on your Android devices today.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="get-started" aria-label="Get Started Section" class="text-center px-4 py-20 container max-w-3xl mx-auto">
+      <h2 class="text-3xl font-semibold mb-6 select-text">Ready to Execute?</h2>
+      <div>
+        <a href="#" class="btn-primary" role="button" aria-label="Download Vertex">Download Vertex</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-black border-t border-purple-900 py-8 mt-24 select-none">
+    <div class="container max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-violet-400 text-sm">
+      <p>© 2024 Vertex V1. All rights reserved.</p>
+      <nav class="flex space-x-6 mt-4 md:mt-0" aria-label="Footer Navigation">
+        <a href="#privacy" class="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded">Privacy</a>
+        <a href="#terms" class="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded">Terms</a>
+        <a href="#docs" class="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 rounded">Docs</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Dark mode toggle - inverted logic as background is black by default (dark)
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const htmlEl = document.documentElement;
+
+    // Here, default theme is dark (black background = dark)
+    // Light theme toggles on/off white background & dark text for demonstration
+    function setTheme(isLight) {
+      if (isLight) {
+        htmlEl.classList.add('light-theme');
+        htmlEl.classList.remove('dark');
+        themeToggle.textContent = 'Dark';
+        mobileThemeToggle && (mobileThemeToggle.textContent = 'Dark');
+        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.color = '#6b7280';
+      } else {
+        htmlEl.classList.remove('light-theme');
+        htmlEl.classList.add('dark');
+        themeToggle.textContent = 'Light';
+        mobileThemeToggle && (mobileThemeToggle.textContent = 'Light');
+        document.body.style.backgroundColor = 'var(--color-bg-dark)';
+        document.body.style.color = 'var(--color-body-text)';
+      }
+    }
+
+    // Initialize theme as dark on load
+    setTheme(false);
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = htmlEl.classList.contains('light-theme');
+      setTheme(!isLight);
+    });
+
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', () => {
+        const isLight = htmlEl.classList.contains('light-theme');
+        setTheme(!isLight);
+      });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      mobileMenuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
+
